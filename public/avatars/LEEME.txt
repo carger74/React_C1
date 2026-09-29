@@ -1,0 +1,3 @@
+Coloca aquí las fotos del equipo (por ejemplo carlos.jpg, alberto.jpg, axel.jpg)
+y escribe la ruta en src/data/equipo.js, campo "foto": "/avatars/carlos.jpg".
+Si no hay foto, la app muestra las iniciales.

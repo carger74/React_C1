@@ -1,0 +1,291 @@
+/* Paleta inspirada en una tarjeta de circuito impreso:
+   máscara antisoldante verde, pistas de cobre y serigrafía clara. */
+:root {
+  --mascara: #0f4d3a;
+  --mascara-profunda: #0a3a2c;
+  --cobre: #c8894a;
+  --cobre-claro: #e4ae74;
+  --serigrafia: #eef2ec;
+  --texto-suave: #9fc2b1;
+  --borde: rgba(200, 137, 74, 0.35);
+
+  --fuente-titulos: 'Chakra Petch', 'Segoe UI', system-ui, sans-serif;
+  --fuente-texto: 'IBM Plex Sans', 'Segoe UI', system-ui, sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+}
+
+body {
+  min-height: 100vh;
+  font-family: var(--fuente-texto);
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--serigrafia);
+  background-color: var(--mascara);
+  /* Vías del circuito */
+  background-image: radial-gradient(rgba(200, 137, 74, 0.16) 1.2px, transparent 1.7px);
+  background-size: 22px 22px;
+  -webkit-font-smoothing: antialiased;
+}
+
+.pagina {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 40px 20px 32px;
+}
+
+/* Encabezado */
+.encabezado {
+  max-width: 34rem;
+  margin-bottom: 36px;
+}
+
+.encabezado h1 {
+  margin: 0 0 12px;
+  font-family: var(--fuente-titulos);
+  font-weight: 700;
+  font-size: clamp(2.25rem, 9vw, 3.5rem);
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+}
+
+.encabezado p {
+  margin: 0;
+  color: var(--texto-suave);
+}
+
+/* Lista del equipo: una pista de cobre conecta las tarjetas */
+.equipo {
+  position: relative;
+  display: grid;
+  gap: 28px;
+  margin: 0;
+  padding: 0 0 0 36px;
+  list-style: none;
+}
+
+.equipo::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 11px;
+  width: 3px;
+  border-radius: 2px;
+  background: var(--cobre);
+  transform-origin: top;
+  animation: trazar-vertical 900ms ease-out both;
+}
+
+.equipo__item {
+  position: relative;
+}
+
+/* Ramal de la pista hacia la tarjeta */
+.equipo__item::before {
+  content: '';
+  position: absolute;
+  top: 66px;
+  left: -24px;
+  width: 24px;
+  height: 3px;
+  background: var(--cobre);
+}
+
+/* Pad circular sobre la pista */
+.equipo__item::after {
+  content: '';
+  position: absolute;
+  top: 59px;
+  left: -32px;
+  width: 17px;
+  height: 17px;
+  border: 3px solid var(--cobre);
+  border-radius: 50%;
+  background: var(--mascara);
+}
+
+/* Tarjeta de perfil */
+.tarjeta {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 24px;
+  border: 1px solid var(--borde);
+  border-radius: 16px;
+  background: var(--mascara-profunda);
+}
+
+.avatar {
+  flex-shrink: 0;
+  width: 88px;
+  height: 88px;
+  padding: 4px;
+  border: 3px solid var(--cobre);
+  border-radius: 50%;
+}
+
+.avatar img,
+.avatar span {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.avatar span {
+  background: var(--mascara);
+  font-family: var(--fuente-titulos);
+  font-weight: 700;
+  font-size: 1.75rem;
+  color: var(--cobre-claro);
+}
+
+.tarjeta__nombre {
+  margin: 18px 0 4px;
+  font-family: var(--fuente-titulos);
+  font-weight: 600;
+  font-size: 1.5rem;
+  line-height: 1.2;
+}
+
+.tarjeta__rol {
+  margin: 0 0 20px;
+  color: var(--texto-suave);
+}
+
+.tarjeta__subtitulo {
+  margin: 0 0 10px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--cobre-claro);
+}
+
+.intereses {
+  display: grid;
+  gap: 8px;
+  margin: 0 0 24px;
+  padding: 0;
+  list-style: none;
+}
+
+.intereses li {
+  position: relative;
+  padding-left: 20px;
+}
+
+.intereses li::before {
+  content: '';
+  position: absolute;
+  top: 0.5em;
+  left: 0;
+  width: 8px;
+  height: 8px;
+  border-radius: 1px;
+  background: var(--cobre);
+}
+
+/* Arreglo de botones de redes profesionales */
+.redes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: auto 0 0;
+  padding: 18px 0 0;
+  border-top: 1px dashed var(--borde);
+  list-style: none;
+}
+
+.redes__boton {
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border: 1.5px solid var(--cobre);
+  border-radius: 12px;
+  font-size: 1.25rem;
+  color: var(--cobre-claro);
+  transition: background-color 150ms ease, color 150ms ease;
+}
+
+.redes__boton:hover {
+  background: var(--cobre);
+  color: var(--mascara-profunda);
+}
+
+.redes__boton:focus-visible {
+  outline: 3px solid var(--serigrafia);
+  outline-offset: 3px;
+}
+
+.pie {
+  margin-top: 40px;
+  font-size: 0.875rem;
+  color: var(--texto-suave);
+}
+
+/* Escritorio: tres columnas y la pista corre en horizontal */
+@media (min-width: 860px) {
+  .pagina {
+    padding-top: 64px;
+  }
+
+  .equipo {
+    grid-template-columns: repeat(3, 1fr);
+    padding: 36px 0 0;
+  }
+
+  .equipo::before {
+    top: 11px;
+    right: 0;
+    bottom: auto;
+    left: 0;
+    width: auto;
+    height: 3px;
+    transform-origin: left;
+    animation-name: trazar-horizontal;
+  }
+
+  .equipo__item::before {
+    top: -24px;
+    left: calc(50% - 1.5px);
+    width: 3px;
+    height: 24px;
+  }
+
+  .equipo__item::after {
+    top: -32px;
+    left: calc(50% - 8.5px);
+  }
+}
+
+@keyframes trazar-vertical {
+  from { transform: scaleY(0); }
+  to { transform: scaleY(1); }
+}
+
+@keyframes trazar-horizontal {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .equipo::before {
+    animation: none;
+  }
+
+  .redes__boton {
+    transition: none;
+  }
+}
